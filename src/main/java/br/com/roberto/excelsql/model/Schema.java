@@ -1,30 +1,19 @@
 package br.com.roberto.excelsql.model;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Schema {
 
-	private Map<Integer, FieldType> columnTypes;
-	private Map<Integer, String> columnNames;
-
-	public enum FieldType {
-		TIMESTAMP, NUMBER, TEXT;
+	List<Field> fields = new ArrayList<Field>();    
+	
+	public void addField(Field field){
+		fields.add(field);
 	}
-
-	public Map<Integer, FieldType> getColumnTypes() {
-		return columnTypes;
+	
+	public List<Field> getFields(){
+		return Collections.unmodifiableList(fields);
 	}
-
-	public void setColumnTypes(Map<Integer, FieldType> columnTypes) {
-		this.columnTypes = columnTypes;
-	}
-
-	public Map<Integer, String> getColumnNames() {
-		return columnNames;
-	}
-
-	public void setColumnNames(Map<Integer, String> columnNames) {
-		this.columnNames = columnNames;
-	}
-
+	
 }
