@@ -58,7 +58,7 @@ public class RowWrapperTest {
 		
 		SheetWrapper firstSheet = poiWrapper.getSheetWrapper(0);
 
-		RowWrapper secondRow = firstSheet.getRow(7);
+		RowWrapper secondRow = firstSheet.getRow(8);
 		
 		List<Field<?>> columns = secondRow.getFields();
 		
