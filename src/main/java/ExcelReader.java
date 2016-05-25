@@ -1,6 +1,5 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import br.com.roberto.excelsql.model.Field;
@@ -17,23 +16,15 @@ public class ExcelReader implements Reader {
 
 	@Override
 	public List<Row<Field<?>>> allRows() {
-		
+
 		List<Row<Field<?>>> rows = new ArrayList<Row<Field<?>>>();
 
-		Iterator<RowWrapper> iterator = new ExcelIterator(excelFile, sheetIndex).iterator();
-
-		while (iterator.hasNext()) {
-			//acabar com o iterator
-			//utilizar o sheet wrapper para pegar o nomero de linhas
-			//faezr um for para o rowrapper
-			//fazer teste dos wrappers
-			
-			RowWrapper rowWrapper = iterator.next();
+		SheetWrapper sheetWrapper = new PoiWrapper(excelFile).getSheetWrapper(sheetIndex);
+		Integer rowsCount = sheetWrapper.rowsCount();
+		for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++) {
+			RowWrapper rowWrapper = sheetWrapper.getRow(rowIndex);
 			if (rowWrapper != null) {
-				List<Field<?>> fields = rowWrapper.getFields();
-				if (fields.size() > 0) {
-					rows.add(new Row<Field<?>>(rowWrapper.getIndex(), fields));
-				}
+				rows.add(new Row<Field<?>>(rowWrapper.getIndex(), rowWrapper.getFields()));
 			}
 		}
 

@@ -7,7 +7,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		File file = new File("/home/roberto/dev/java/x-sql-digester/src/main/resources/all-columns-fulfilled.xlsx");
+		File file = MyFileUtils.getResourceFile("excel-all-formats-test.xlsx");
 		
 		List<Row<Field<?>>> rows = new ExcelReader(file, 0).allRows();
 		

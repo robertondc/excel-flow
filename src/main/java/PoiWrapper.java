@@ -14,18 +14,13 @@ public class PoiWrapper {
 		this.excelFile = excelFile;
 	}
 
-	public SheetWrapper sheetWrapper(Integer sheetIndex) {
-		Sheet poiSheet = getPoiSheet(sheetIndex);
-		return new SheetWrapper(poiSheet);
-	}
-
-	private Sheet getPoiSheet(Integer sheetIndex) {
+	public SheetWrapper getSheetWrapper(Integer sheetIndex) {
 		InputStream excelInput = null;
+		Sheet poiSheet = null;
 		try {
 			excelInput = new FileInputStream(excelFile);
 			Workbook workBook = WorkbookFactory.create(excelInput);
-			Sheet sheet = workBook.getSheetAt(sheetIndex);
-			return sheet;
+			poiSheet = workBook.getSheetAt(sheetIndex);
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		} finally {
@@ -35,6 +30,7 @@ public class PoiWrapper {
 				throw new RuntimeException(ex);
 			}
 		}
+		return new SheetWrapper(poiSheet);
 	}
 
 }

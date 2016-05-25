@@ -13,9 +13,13 @@ public class SheetWrapper {
 		return poiSheet.getLastRowNum();
 	}
 
-	public RowWrapper getRow(int currentIndex) {
-		Row poiRow = poiSheet.getRow(currentIndex);
+	public RowWrapper getRow(int rowIndex) {
+		Row poiRow = poiSheet.getRow(rowIndex);
 		return poiRow == null ? null : new RowWrapper(poiRow);
+	}
+	
+	public String getSheetName(){
+		return poiSheet.getSheetName();
 	}
 
 }
